@@ -1,33 +1,22 @@
-# MinerTimer Home Assistant Integration
+# MinerTimer
 
-Control Minecraft playtime limits from Home Assistant
+Home Assistant integration for MinerTimer - a parental control app for gaming time limits.
 
 ## Installation
 
-### HACS (Recommended)
-
-1. Make sure [HACS](https://hacs.xyz) is installed
-2. Add this repository to HACS:
-   - HACS → Integrations → ⋮ → Custom repositories
-   - Add URL: `https://github.com/kburbank/minertimer-ha`
+1. Install via HACS:
+   - Add this repository as a custom repository in HACS
    - Category: Integration
-3. Click "Download"
-4. Restart Home Assistant
-5. Add the integration:
-   - Settings → Devices & Services → Add Integration
-   - Search for "MinerTimer"
+   - Click Install
 
-### Manual
-
-1. Copy the `custom_components/minertimer` directory to your Home Assistant `custom_components` directory
 2. Restart Home Assistant
-3. Add the integration through the UI
+
+3. Add the integration:
+   - Go to Configuration > Integrations
+   - Click the + button
+   - Search for "MinerTimer"
+   - Follow the setup process
 
 ## Configuration
 
-The integration will automatically create:
-- An input_number entity for time limits
-- A sensor for tracking played time
-- A daily reset automation
-
-No additional configuration needed! 
+Configure the integration through the UI in Home Assistant. 

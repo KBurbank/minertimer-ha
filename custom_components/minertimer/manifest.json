@@ -1,16 +1,16 @@
 {
   "domain": "minertimer",
   "name": "MinerTimer",
-  "documentation": "https://github.com/kburbank/minertimer-ha",
+  "codeowners": [
+    "@kburbank"
+  ],
+  "config_flow": true,
   "dependencies": [
     "http",
     "application_credentials"
   ],
-  "codeowners": [
-    "@kburbank"
-  ],
-  "requirements": [],
+  "documentation": "https://github.com/kburbank/minertimer-ha",
   "iot_class": "local_push",
-  "version": "1.0.7",
-  "config_flow": true
+  "requirements": [],
+  "version": "1.0.7"
 }

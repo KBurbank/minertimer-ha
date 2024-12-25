@@ -5,6 +5,6 @@
   "documentation": "https://github.com/kburbank/minertimer-ha",
   "issue_tracker": "https://github.com/kburbank/minertimer-ha/issues",
   "dependencies": [],
-  "version": "1.0.6",
+  "version": "1.0.7",
   "homeassistant": "2023.8.0"
 }

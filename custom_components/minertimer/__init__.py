@@ -1,14 +1,21 @@
 """The MinerTimer integration."""
 from __future__ import annotations
 
+import voluptuous as vol
+
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
 from homeassistant.const import Platform
+from homeassistant.core import HomeAssistant
+import homeassistant.helpers.config_validation as cv
 
 from .const import DOMAIN
-from .oauth2 import MinerTimerOAuth2Implementation
 
 PLATFORMS = ["sensor", "number"]
+
+CONFIG_SCHEMA = vol.Schema(
+    {DOMAIN: vol.Schema({})}, 
+    extra=vol.ALLOW_EXTRA
+)
 
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     """Set up the MinerTimer component."""
@@ -19,9 +26,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up MinerTimer from a config entry."""
     hass.data.setdefault(DOMAIN, {})
     hass.data[DOMAIN][entry.entry_id] = {}
-
-    implementation = MinerTimerOAuth2Implementation(hass)
-    await hass.auth.async_add_auth_provider(implementation)
     
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True

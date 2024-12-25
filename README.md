@@ -9,7 +9,7 @@ Control Minecraft playtime limits from Home Assistant
 1. Make sure [HACS](https://hacs.xyz) is installed
 2. Add this repository to HACS:
    - HACS → Integrations → ⋮ → Custom repositories
-   - Add URL: `https://github.com/yourusername/minertimer-ha`
+   - Add URL: `https://github.com/kburbank/minertimer-ha`
    - Category: Integration
 3. Click "Download"
 4. Restart Home Assistant

@@ -6,6 +6,19 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+# Check for untracked files
+UNTRACKED=$(git ls-files --others --exclude-standard)
+if [ ! -z "$UNTRACKED" ]; then
+    echo "Found untracked files:"
+    echo "$UNTRACKED"
+    read -p "Would you like to add them? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        git add $UNTRACKED
+        echo "Added untracked files"
+    fi
+fi
+
 # Function to increment version number
 increment_version() {
     local version=$1

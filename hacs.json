@@ -2,9 +2,9 @@
   "name": "MinerTimer",
   "render_readme": true,
   "domain": "minertimer",
-  "documentation": "https://github.com/yourusername/minertimer-ha",
-  "issue_tracker": "https://github.com/yourusername/minertimer-ha/issues",
+  "documentation": "https://github.com/kburbank/minertimer-ha",
+  "issue_tracker": "https://github.com/kburbank/minertimer-ha/issues",
   "dependencies": [],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homeassistant": "2023.8.0"
 } 

@@ -1,46 +1,53 @@
 """Config flow for MinerTimer."""
-from homeassistant import config_entries
-from homeassistant.helpers import config_entry_oauth2_flow
-from homeassistant.core import callback
-import logging
+from __future__ import annotations
+
+from typing import Any
 import voluptuous as vol
 
-from .const import DOMAIN
+from homeassistant import config_entries
+from homeassistant.core import HomeAssistant
+from homeassistant.data_entry_flow import FlowResult
+from homeassistant.helpers import config_entry_oauth2_flow
+
+from .const import DOMAIN, CLIENT_ID, CLIENT_SECRET
 from .oauth2 import MinerTimerOAuth2Implementation
 
-class OAuth2FlowHandler(
-    config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=DOMAIN
-):
-    """Config flow for OAuth2."""
+async def async_get_auth_implementation(
+    hass: HomeAssistant, 
+    auth_domain: str,
+    credential: dict[str, Any],
+) -> MinerTimerOAuth2Implementation:
+    """Return auth implementation."""
+    return MinerTimerOAuth2Implementation(hass)
 
-    DOMAIN = DOMAIN
+class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """Handle a config flow for MinerTimer."""
+
     VERSION = 1
 
-    @property
-    def logger(self):
-        """Return logger."""
-        return logging.getLogger(__name__)
+    def __init__(self) -> None:
+        """Initialize flow."""
+        self._auth_implementation: MinerTimerOAuth2Implementation | None = None
 
-    async def async_step_user(self, user_input=None):
-        """Handle a flow initialized by the user."""
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        """Handle the initial step."""
         if self._async_current_entries():
             return self.async_abort(reason="single_instance_allowed")
 
-        if not user_input:
+        if user_input is None:
             return self.async_show_form(
                 step_id="user",
                 data_schema=vol.Schema({}),
             )
 
-        implementation = MinerTimerOAuth2Implementation(self.hass)
-        await self.hass.async_add_executor_job(
-            self.hass.auth.auth_providers[0].async_register_implementation,
-            implementation
-        )
+        self._auth_implementation = MinerTimerOAuth2Implementation(self.hass)
 
-        return await self.async_step_pick_implementation()
-
-    @callback
-    def async_get_options_flow(config_entry):
-        """Get options flow."""
-        return OptionsFlowHandler(config_entry) 
+        return self.async_create_entry(
+            title="MinerTimer",
+            data={
+                "auth_implementation": DOMAIN,
+                "implementation": self._auth_implementation,
+            },
+        ) 

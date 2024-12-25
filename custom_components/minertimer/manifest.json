@@ -2,16 +2,10 @@
   "domain": "minertimer",
   "name": "MinerTimer",
   "documentation": "https://github.com/kburbank/minertimer-ha",
-  "dependencies": ["http"],
+  "dependencies": ["http", "auth"],
   "codeowners": ["@kburbank"],
   "requirements": [],
   "iot_class": "local_push",
-  "version": "Invalid version type. Use major, minor, or patch",
-  "config_flow": true,
-  "ssdp": [],
-  "zeroconf": [],
-  "homekit": {},
-  "oauth2_authorize": "/auth/authorize",
-  "oauth2_token": "/auth/token",
-  "auth_provider": "oauth2"
+  "version": "1.0.1",
+  "config_flow": true
 } 

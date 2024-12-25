@@ -4,7 +4,7 @@ from homeassistant.helpers import config_entry_oauth2_flow
 from homeassistant.core import callback
 import logging
 
-from .const import DOMAIN, CLIENT_ID, CLIENT_SECRET
+from .const import DOMAIN, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
 
 class OAuth2FlowHandler(
     config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=DOMAIN
@@ -28,6 +28,11 @@ class OAuth2FlowHandler(
     def client_secret(self):
         """Return the client secret."""
         return CLIENT_SECRET
+
+    @property
+    def redirect_uri(self):
+        """Return the redirect URI."""
+        return REDIRECT_URI
 
     async def async_step_user(self, user_input=None):
         """Handle a flow initialized by the user."""
